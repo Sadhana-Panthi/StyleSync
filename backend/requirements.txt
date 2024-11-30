@@ -1,0 +1,7 @@
+fastapi
+pydantic
+pyngrok
+nest_asyncio
+uvicorn
+sqlalchemy
+cloudinary
