@@ -1,0 +1,75 @@
+id: myflow
+namespace: company.team
+tasks:
+  - id: gen_design
+    type: io.kestra.plugin.scripts.python.Script
+    script: |
+      import requests
+      root_url = "https://3edd-45-123-223-190.ngrok-free.app"
+      def generate_design(prompt, negative_prompt="string"):
+          url = f"{root_url}/gen_design"
+          headers = {
+              "accept": "application/json",
+              "Content-Type": "application/json"
+          }
+          data = {
+              "prompt": prompt,
+              "negative_prompt": negative_prompt
+          }
+          
+          try:
+              response = requests.post(url, headers=headers, json=data)
+              response.raise_for_status()  # Raises HTTPError if the response was unsuccessful
+              return response.json()  # Returns the JSON response
+          except requests.exceptions.RequestException as e:
+              print(f"Error making the request: {e}")
+              return None
+
+      # Example usage
+      prompt_text = "A  t-shirt design featuring abstract geometric shapes in neon red colors, with a cyberpunk aesthetic. tshirt for men"
+      result = generate_design(prompt_text)
+
+      if result:
+        cloth_url = result.get("cloudinary_urls") 
+        print("Cloudinary URL:", cloth_url)
+        male_model = "https://res.cloudinary.com/dbhckg5el/image/upload/v1732529006/models/image_1_w3mspz.png"
+          
+        def try_on(person, cloth):
+            url = f"{root_url}/try_on1"
+            headers = {
+                "accept": "application/json",
+                "Content-Type": "application/json"
+            }
+            data = {
+                "person": person,
+                "cloth": cloth
+            }
+            response = requests.post(url, json=data, headers=headers)
+            return response.json()
+        
+        result_model = try_on(male_model, cloth_url).get("cloudinary_urls") 
+        print(f"final model url {result_model}")
+
+        def upload_new_design(image_url, cloth_url, caption):
+            url = f"{root_url}/upload"
+            headers = {
+                "accept": "application/json",
+                "Content-Type": "application/json"
+            }
+            data = {
+                "image_url": image_url,
+                "cloth_url": cloth_url,
+                "caption": caption
+            }
+            try:
+                response = requests.post(url, headers=headers, json=data)
+                return response.json()
+            except requests.exceptions.RequestException as e:
+                return {"error": str(e)}
+
+        message = upload_new_design(result_model, cloth_url, prompt_text)
+
+triggers:
+  - id: every-day
+    type: io.kestra.plugin.core.trigger.Schedule
+    cron: "0 0 */1 * *"

@@ -1,0 +1,1 @@
+model: https://res.cloudinary.com/dbhckg5el/image/upload/v1732798781/models/x_wib459.png
