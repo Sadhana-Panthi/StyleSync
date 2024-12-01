@@ -1,4 +1,4 @@
-# StyleSync (Automating a T-Shirt Brand with Kestra and AI)
+# StyleSync (Automating T-Shirt Brand with Kestra & AI)
 
 ## Overview
 
@@ -25,6 +25,11 @@ The project is divided into two main parts:
 - **Database**: SQLite
 - **Cloud Integration**: Cloudinary for image hosting
 
+## Demo
+
+<img src="ss1.png" alt="first image" width="350"> <img src="ss2.png" alt="first image" width="350"> 
+
+StyleSync demo [here](https://youtu.be/zR-WOvql-38?si=JTMRm8WVT6v6RVny)
 
 ## Installation
 
