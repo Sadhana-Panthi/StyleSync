@@ -25,6 +25,10 @@ The project is divided into two main parts:
 - **Database**: SQLite
 - **Cloud Integration**: Cloudinary for image hosting
 
+
+## System Block Diagram 
+<img src="workflow.png" alt="first image" width="400">
+
 ## Demo
 
 <img src="ss1.png" alt="first image" width="350"> <img src="ss2.png" alt="first image" width="350"> 
