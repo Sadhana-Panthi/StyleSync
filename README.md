@@ -70,7 +70,7 @@ npm start
 ## Kestra Setup
 - Set up Kestra to automate the workflow by configuring the appropriate Python scripts and triggering mechanisms.
 - Ensure that Kestra is connected to the backend APIs for generating designs and updating listings.
-
+### kestra in YAML format in the code : [code](https://github.com/Sadhana-Panthi/StyleSync/blob/main/backend/gen_design.yml)
 
 
 
